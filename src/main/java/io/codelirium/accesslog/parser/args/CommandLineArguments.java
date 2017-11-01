@@ -19,11 +19,11 @@ public class CommandLineArguments {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommandLineArguments.class);
 
-	private static final String ARG_DELIMITER = "=";
-	private static final String ARG_ALL_FILE  = "--accesslog";
-	private static final String ARG_STARTDATE = "--startDate";
-	private static final String ARG_DURATION  = "--duration";
-	private static final String ARG_THRESHOLD = "--threshold";
+	protected static final String ARG_DELIMITER = "=";
+	protected static final String ARG_ALL_FILE  = "--accesslog";
+	protected static final String ARG_STARTDATE = "--startDate";
+	protected static final String ARG_DURATION  = "--duration";
+	protected static final String ARG_THRESHOLD = "--threshold";
 
 
 	public List<Argument> parse(String... args) throws Exception {
@@ -34,6 +34,8 @@ public class CommandLineArguments {
 		int found = 0;
 
 		for (String arg : args) {
+
+			if (!arg.contains(ARG_DELIMITER)) break;
 
 			String value = arg.split(ARG_DELIMITER)[1];
 
