@@ -36,6 +36,10 @@ public class Parser implements CommandLineRunner {
 
 		List<Argument> arguments = commandLineArguments.parse(args);
 
+		if (arguments.isEmpty()) {
+			return;
+		}
+
 		arguments.forEach(argument -> LOGGER.debug(argument.toString()));
 
 
