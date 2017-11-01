@@ -19,13 +19,14 @@ import java.util.Date;
 import static io.codelirium.accesslog.parser.Parser.DATE_FORMAT_WITH_MS;
 import static io.codelirium.accesslog.parser.args.DurationEnum.hourly;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccessLogManagerTest {
 
-	private static final String DEFAULT_LOG = "log/access.log";
+	public static final String DEFAULT_LOG = "log/access.log";
 
 
 	private AccessLogManager accessLogManager;
@@ -67,7 +68,7 @@ public class AccessLogManagerTest {
 	@Test
 	public void testThatParseAndPersistIsSuccessfull() throws IOException {
 		accessLogManager.parseAndPersist(DEFAULT_LOG);
-		verify(accessLogRepository, times(116484)).save(Mockito.any(AccessLogLine.class));
+		verify(accessLogRepository, times(116484)).save(any(AccessLogLine.class));
 	}
 
 	@Test
