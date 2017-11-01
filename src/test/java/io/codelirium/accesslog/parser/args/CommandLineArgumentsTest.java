@@ -3,7 +3,7 @@ package io.codelirium.accesslog.parser.args;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import static io.codelirium.accesslog.parser.args.DurationEnum.daily;
 import static org.junit.Assert.assertTrue;
 
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 public class CommandLineArgumentsTest {
 
 	private CommandLineArguments commandLineArguments;

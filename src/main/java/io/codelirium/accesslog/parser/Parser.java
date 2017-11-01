@@ -24,11 +24,15 @@ public class Parser implements CommandLineRunner {
 	public static final String DATE_FORMAT_WITHOUT_MS = "yyyy-MM-dd.HH:mm:ss";
 
 
-	@Inject
 	private AccessLogManager accessLogManager;
+	private CommandLineArguments commandLineArguments;
+
 
 	@Inject
-	private CommandLineArguments commandLineArguments;
+	public Parser(AccessLogManager accessLogManager, CommandLineArguments commandLineArguments) {
+		this.accessLogManager = accessLogManager;
+		this.commandLineArguments = commandLineArguments;
+	}
 
 
 	@Override
