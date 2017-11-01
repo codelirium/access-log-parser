@@ -20,6 +20,7 @@ public class CommandLineArguments {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommandLineArguments.class);
 
 	private static final String ARG_DELIMITER = "=";
+	private static final String ARG_ALL_FILE  = "--accesslog";
 	private static final String ARG_STARTDATE = "--startDate";
 	private static final String ARG_DURATION  = "--duration";
 	private static final String ARG_THRESHOLD = "--threshold";
@@ -36,7 +37,13 @@ public class CommandLineArguments {
 
 			String value = arg.split(ARG_DELIMITER)[1];
 
-			if (arg.contains(ARG_STARTDATE)) {
+			if (arg.contains(ARG_ALL_FILE)) {
+
+				found++;
+				Argument<String> argument = new Argument<>(ARG_ALL_FILE, value);
+				arguments.add(argument);
+
+			} else if (arg.contains(ARG_STARTDATE)) {
 
 				found++;
 				try {
@@ -60,7 +67,7 @@ public class CommandLineArguments {
 			}
 		}
 
-		if (found != 3) {
+		if (found != 4) {
 
 			LOGGER.error("Some arguments are missing. The arguments are: {} / {} / {}.", ARG_STARTDATE, ARG_DURATION, ARG_THRESHOLD);
 

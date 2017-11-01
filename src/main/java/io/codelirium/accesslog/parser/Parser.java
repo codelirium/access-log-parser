@@ -35,17 +35,17 @@ public class Parser implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		accessLogManager.parseAndPersist(DEFAULT_LOG);
-
-
 		List<Argument> arguments = commandLineArguments.parse(args);
 
 		arguments.forEach(argument -> LOGGER.debug(argument.toString()));
 
 
-		List<String> ips = accessLogManager.findIPs((Date)         arguments.get(0).getValue(),
-													(DurationEnum) arguments.get(1).getValue(),
-													(Integer)      arguments.get(2).getValue());
+		accessLogManager.parseAndPersist((String) arguments.get(0).getValue());
+
+
+		List<String> ips = accessLogManager.findIPs((Date)         arguments.get(1).getValue(),
+													(DurationEnum) arguments.get(2).getValue(),
+													(Integer)      arguments.get(3).getValue());
 
 		ips.forEach(LOGGER::info);
 	}
