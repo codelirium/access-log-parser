@@ -22,6 +22,9 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CommandLineArgumentsTest {
 
+	private static final String ARG_EMPTY = "";
+
+
 	private CommandLineArguments commandLineArguments;
 
 
@@ -53,7 +56,7 @@ public class CommandLineArgumentsTest {
 		String argDuration  = getDurationArgumentString();
 		String argThreshold = getThresholdArgumentString();
 
-		List<Argument> arguments = commandLineArguments.parse("", argStartDate, argDuration, argThreshold);
+		List<Argument> arguments = commandLineArguments.parse(ARG_EMPTY, argStartDate, argDuration, argThreshold);
 
 		assertTrue(arguments.isEmpty());
 	}
@@ -64,7 +67,7 @@ public class CommandLineArgumentsTest {
 		String argDuration  = getDurationArgumentString();
 		String argThreshold = getThresholdArgumentString();
 
-		List<Argument> arguments = commandLineArguments.parse(argAccessLog, "", argDuration, argThreshold);
+		List<Argument> arguments = commandLineArguments.parse(argAccessLog, ARG_EMPTY, argDuration, argThreshold);
 
 		assertTrue(arguments.isEmpty());
 	}
@@ -75,7 +78,7 @@ public class CommandLineArgumentsTest {
 		String argStartDate = getStartDateArgumentString();
 		String argThreshold = getThresholdArgumentString();
 
-		List<Argument> arguments = commandLineArguments.parse(argAccessLog, argStartDate, "", argThreshold);
+		List<Argument> arguments = commandLineArguments.parse(argAccessLog, argStartDate, ARG_EMPTY, argThreshold);
 
 		assertTrue(arguments.isEmpty());
 	}
@@ -86,7 +89,7 @@ public class CommandLineArgumentsTest {
 		String argStartDate = getStartDateArgumentString();
 		String argDuration  = getDurationArgumentString();
 
-		List<Argument> arguments = commandLineArguments.parse(argAccessLog, argStartDate, argDuration, "");
+		List<Argument> arguments = commandLineArguments.parse(argAccessLog, argStartDate, argDuration, ARG_EMPTY);
 
 		assertTrue(arguments.isEmpty());
 	}

@@ -22,6 +22,8 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ParserTest {
 
+	private static final String ARG_EMPTY = "";
+
 	private Parser parser;
 	@Mock
 	private AccessLogRepository accessLogRepository;
@@ -37,9 +39,37 @@ public class ParserTest {
 
 
 	@Test
-	public void testThatParserIsSuccessfull() throws Exception {
+	public void testThatParserBehavesCorrectlyScenarioOne() throws Exception {
 		parser.run(getAccessLogArgumentString(), getStartDateArgumentString(), getDurationArgumentString(), getThresholdArgumentString());
 		verify(accessLogRepository, times(116484)).save(any(AccessLogLine.class));
 		verify(accessLogRepository, times(1)).findIpsAboveRequestCountWithinDateRange(anyInt(), any(Date.class), any(Date.class));
+	}
+
+	@Test
+	public void testThatParserBehavesCorrectlyScenarioTwo() throws Exception {
+		parser.run(ARG_EMPTY, getStartDateArgumentString(), getDurationArgumentString(), getThresholdArgumentString());
+		verify(accessLogRepository, times(0)).save(any(AccessLogLine.class));
+		verify(accessLogRepository, times(0)).findIpsAboveRequestCountWithinDateRange(anyInt(), any(Date.class), any(Date.class));
+	}
+
+	@Test
+	public void testThatParserBehavesCorrectlyScenarioThree() throws Exception {
+		parser.run(getAccessLogArgumentString(), ARG_EMPTY, getDurationArgumentString(), getThresholdArgumentString());
+		verify(accessLogRepository, times(0)).save(any(AccessLogLine.class));
+		verify(accessLogRepository, times(0)).findIpsAboveRequestCountWithinDateRange(anyInt(), any(Date.class), any(Date.class));
+	}
+
+	@Test
+	public void testThatParserBehavesCorrectlyScenarioFour() throws Exception {
+		parser.run(getAccessLogArgumentString(), getStartDateArgumentString(), ARG_EMPTY, getThresholdArgumentString());
+		verify(accessLogRepository, times(0)).save(any(AccessLogLine.class));
+		verify(accessLogRepository, times(0)).findIpsAboveRequestCountWithinDateRange(anyInt(), any(Date.class), any(Date.class));
+	}
+
+	@Test
+	public void testThatParserBehavesCorrectlyScenarioFive() throws Exception {
+		parser.run(getAccessLogArgumentString(), getStartDateArgumentString(), getDurationArgumentString(), ARG_EMPTY);
+		verify(accessLogRepository, times(0)).save(any(AccessLogLine.class));
+		verify(accessLogRepository, times(0)).findIpsAboveRequestCountWithinDateRange(anyInt(), any(Date.class), any(Date.class));
 	}
 }
