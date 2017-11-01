@@ -28,7 +28,7 @@ public class CommandLineArguments {
 
 	public List<Argument> parse(String... args) throws Exception {
 
-		List<Argument> arguments = new ArrayList<>(3);
+		List<Argument> arguments = new ArrayList<>(4);
 
 
 		int found = 0;
@@ -69,7 +69,7 @@ public class CommandLineArguments {
 
 		if (found != 4) {
 
-			LOGGER.error("Some arguments are missing. The arguments are: {} / {} / {}.", ARG_STARTDATE, ARG_DURATION, ARG_THRESHOLD);
+			LOGGER.error("Some arguments are missing. The arguments are: {} / {} / {} / {}.", ARG_ALL_FILE, ARG_STARTDATE, ARG_DURATION, ARG_THRESHOLD);
 
 			return new LinkedList<>();
 		}

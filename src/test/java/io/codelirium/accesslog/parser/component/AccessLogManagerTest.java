@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static io.codelirium.accesslog.parser.Parser.DATE_FORMAT_WITH_MS;
-import static io.codelirium.accesslog.parser.Parser.DEFAULT_LOG;
 import static io.codelirium.accesslog.parser.args.DurationEnum.hourly;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -25,6 +24,9 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccessLogManagerTest {
+
+	private static final String DEFAULT_LOG = "log/access.log";
+
 
 	private AccessLogManager accessLogManager;
 	@Mock

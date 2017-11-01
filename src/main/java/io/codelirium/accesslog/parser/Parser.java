@@ -20,7 +20,6 @@ public class Parser implements CommandLineRunner {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Parser.class);
 
-	public static final String DEFAULT_LOG = "log/access.log";
 	public static final String DATE_FORMAT_WITH_MS = "yyyy-MM-dd HH:mm:ss.SSS";
 	public static final String DATE_FORMAT_WITHOUT_MS = "yyyy-MM-dd.HH:mm:ss";
 
