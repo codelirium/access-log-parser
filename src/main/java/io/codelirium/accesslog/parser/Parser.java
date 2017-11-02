@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 import javax.inject.Inject;
 import java.util.Date;
@@ -41,7 +42,9 @@ public class Parser implements CommandLineRunner {
 		List<Argument> arguments = commandLineArguments.parse(args);
 
 		if (arguments.isEmpty()) {
+
 			return;
+
 		}
 
 		arguments.forEach(argument -> LOGGER.debug(argument.toString()));
@@ -54,7 +57,14 @@ public class Parser implements CommandLineRunner {
 													(DurationEnum) getArgValue(arguments, 2),
 													(Integer)      getArgValue(arguments, 3));
 
-		ips.forEach(LOGGER::info);
+		if (ips.size() > 0) {
+
+			LOGGER.info("----< IPs >----");
+
+			ips.forEach(LOGGER::info);
+
+			LOGGER.info("---------------");
+		}
 	}
 
 
@@ -67,7 +77,8 @@ public class Parser implements CommandLineRunner {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(Parser.class, args);
-
+		new SpringApplicationBuilder(Parser.class)
+										.logStartupInfo(false)
+										.run(args);
 	}
 }
