@@ -47,14 +47,21 @@ public class Parser implements CommandLineRunner {
 		arguments.forEach(argument -> LOGGER.debug(argument.toString()));
 
 
-		accessLogManager.parseAndPersist((String) arguments.get(0).getValue());
+		accessLogManager.parseAndPersist((String) getArgValue(arguments, 0));
 
 
-		List<String> ips = accessLogManager.findIPs((Date)         arguments.get(1).getValue(),
-													(DurationEnum) arguments.get(2).getValue(),
-													(Integer)      arguments.get(3).getValue());
+		List<String> ips = accessLogManager.findIPs((Date)         getArgValue(arguments, 1),
+													(DurationEnum) getArgValue(arguments, 2),
+													(Integer)      getArgValue(arguments, 3));
 
 		ips.forEach(LOGGER::info);
+	}
+
+
+	private Object getArgValue(List<Argument> args, int index) {
+
+		return args.get(index).getValue();
+
 	}
 
 
